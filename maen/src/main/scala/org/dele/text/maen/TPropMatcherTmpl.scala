@@ -1,7 +1,7 @@
 package org.dele.text.maen
 
 import org.dele.text.maen.TAtomMatcher.PropMatchBase
-import org.dele.text.maen.utils.HamletError
+import org.dele.text.maen.utils.MaenError
 
 import scala.util.{Failure, Success, Try}
 

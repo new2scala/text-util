@@ -6,17 +6,17 @@ package org.dele.text.maen.utils
 
 import java.util.regex.Pattern
 
-import HamletError._
+import MaenError._
 
-trait HamletError extends Throwable {
+trait MaenError extends Throwable {
   val throwable:Throwable
 
   def describe:String = throwable.getMessage
 
-  lazy val chain:List[HamletError] = {
+  lazy val chain:List[MaenError] = {
     var tmp = throwable
     if (tmp.getCause != null) {
-      val cause = new HamletErrorFromThrowable(tmp.getCause)
+      val cause = new MaenErrorFromThrowable(tmp.getCause)
       cause :: cause.chain
     }
     else List(this)
@@ -40,33 +40,33 @@ trait HamletError extends Throwable {
   }
 }
 
-object HamletError {
-  val NotImplemented = new HamletErrorBase("Not Implemented")
+object MaenError {
+  val NotImplemented = new MaenErrorBase("Not Implemented")
 
-  def Todo(task:String) = new HamletErrorBase(task)
+  def Todo(task:String) = new MaenErrorBase(task)
 
   val MaxStackTraceDepth = 20
 
   def stackTraceElement2String(e:StackTraceElement):String = s"${e.getClassName}::${e.getMethodName}  --  line ${e.getLineNumber}"
 
-  class HamletErrorFromThrowable(val throwable:Throwable) extends HamletError {
+  class MaenErrorFromThrowable(val throwable:Throwable) extends MaenError {
   }
 
-  implicit def Throwable2HamletError(th:Throwable) = new HamletErrorFromThrowable(th)
+  implicit def Throwable2MaenError(th:Throwable) = new MaenErrorFromThrowable(th)
 
-  class HamletErrorBase(msg:String) extends {
+  class MaenErrorBase(msg:String) extends {
     val throwable = new Exception(msg)
-  } with HamletError
+  } with MaenError
 
   def handle(th:Throwable, filter:String = "org.dele.*"):String = {
     th.printStackTrace
     th match {
-      case he:HamletError => {
-        s"Hamlet Error: ${he.describe}\n%s".format(he.showStackChain(filter))
+      case he:MaenError => {
+        s"Maen Error: ${he.describe}\n%s".format(he.showStackChain(filter))
       }
       case t:Throwable => {
-        val hamletError:HamletError = t
-        s"Unknown Error: ${t.getMessage}\n%s".format(hamletError.showStackChain(filter))
+        val MaenError:MaenError = t
+        s"Unknown Error: ${t.getMessage}\n%s".format(MaenError.showStackChain(filter))
       }
     }
   }

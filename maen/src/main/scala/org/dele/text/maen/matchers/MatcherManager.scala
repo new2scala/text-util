@@ -6,7 +6,7 @@ import org.dele.text.maen.matchers.TMatcher.MId
 import org.dele.text.maen._
 import org.dele.text.maen.test.TestProfiler
 import org.dele.text.maen.test.TestProfiler.Counter
-import org.dele.text.maen.utils.HamletError
+import org.dele.text.maen.utils.MaenError
 import org.dele.text.maen.test.TestProfiler
 import org.dele.text.maen.test.TestProfiler.Counter
 import org.dele.text.maen.{AtomSeqMatch, TContext, TInput, TMatchResultPool}
@@ -177,7 +177,7 @@ sealed class MatcherManager private () {
 
           if (matches.nonEmpty) matches = stoppedByMatcherManager.filter(mid, matches, resultPool)
 
-          //throw HamletError.Todo("test") //HamletError.NotImplemented
+          //throw MaenError.Todo("test") //MaenError.NotImplemented
           //if (mergeOverlap) {
           //matches = removeAlmostDuplicates(matches) //mergeMatches(matches)
           //}
@@ -285,7 +285,7 @@ sealed class MatcherManager private () {
       //input.context.getFlag()
       var matches = rawMatches //removeDuplicates(rawMatches) // removeAlmostDuplicates(rawMatches)
       if (matches.nonEmpty) matches = stoppedByMatcherManager.filter(mid, matches, resultPool)
-      //throw HamletError.Todo("test") //HamletError.NotImplemented
+      //throw MaenError.Todo("test") //MaenError.NotImplemented
       //if (mergeOverlap) {
       //matches = removeAlmostDuplicates(matches) //mergeMatches(matches)
       //}

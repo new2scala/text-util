@@ -16,7 +16,7 @@ import scala.util.{Failure, Success, Try}
   */
 object TestHelper {
 
-  val HamletAnnotations2PropMatch:Map[String,String] = Map(
+  val MaenAnnotations2PropMatch:Map[String,String] = Map(
     "F" ->
       """
         |{

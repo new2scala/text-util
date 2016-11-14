@@ -17,5 +17,5 @@ lazy val commonSettings = Seq(
 lazy val root = project.in(file(".")).settings(commonSettings: _*).aggregate(maen, lapa)
 
 lazy val maen = project.settings(commonSettings: _*)
-lazy val lapa = project.settings(commonSettings: _*)
+lazy val lapa = project.settings(commonSettings: _*).dependsOn(maen)
 

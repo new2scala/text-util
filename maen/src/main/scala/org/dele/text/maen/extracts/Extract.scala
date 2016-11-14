@@ -1,11 +1,11 @@
 package org.dele.text.maen.extracts
 
-import org.dele.text.maen.utils.HamletError
+import org.dele.text.maen.utils.MaenError
 import org.dele.text.maen.{AtomSeqMatch, ConfValueStringParser, TAtomMatcher, TMatchResultPool}
 import org.dele.text.maen.matchers.{SubMatchCheckerLib, TMatcher, TSubMatchChecker}
 import org.dele.text.maen.matchers.TMatcher.MId
 import org.dele.text.maen.matchers.{SubMatchCheckerLib, TMatcher}
-import org.dele.text.maen.utils.HamletError
+import org.dele.text.maen.utils.MaenError
 import org.dele.text.maen.{AtomSeqMatch, ConfValueStringParser, TAtomMatcher, TMatchResultPool}
 import org.json4s.JsonAST.{JArray, JField, JObject, JString}
 import org.json4s.{CustomSerializer, NoTypeHints}
@@ -63,7 +63,7 @@ object Extract {
     tmplId match {
       case TmplE => E(EmptyRegexDict, param)
       case TmplEr => Er(EmptyRegexDict, param)
-      case _ => throw HamletError.NotImplemented
+      case _ => throw MaenError.NotImplemented
     }
   }
 
@@ -291,7 +291,7 @@ object Extract {
         case err => throw ExtractErrorJSONFormat(err)
       },
       {
-        case _ => throw HamletError.NotImplemented
+        case _ => throw MaenError.NotImplemented
       }
       )
   )

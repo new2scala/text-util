@@ -2,7 +2,7 @@ package org.dele.text.maen.matchers
 
 import org.dele.text.maen.matchers.SubMatchCheckerLib._
 import org.dele.text.maen.matchers.TMatcher._
-import org.dele.text.maen.utils.HamletError
+import org.dele.text.maen.utils.MaenError
 import org.dele.text.maen.{AtomPropMatcherLib, ConfValueStringParser}
 import org.dele.text.maen.matchers.TSubMatchChecker._
 import org.dele.text.maen.{AtomPropMatcherLib, ConfValueStringParser}
@@ -10,7 +10,7 @@ import org.dele.text.maen.{AtomPropMatcherLib, ConfValueStringParser}
 /**
   * Created by jiaji on 2016-02-29.
   */
-import org.dele.text.maen.utils.HamletError._
+import org.dele.text.maen.utils.MaenError._
 object MatcherTmpl {
   //import scala.collection.mutable
   import TMatcher._

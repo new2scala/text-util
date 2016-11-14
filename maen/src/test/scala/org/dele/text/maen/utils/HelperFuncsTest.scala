@@ -41,7 +41,7 @@ class HelperFuncsTest extends TestNGSuite with ShouldMatchers with TableDrivenPr
   def testNegMatcherIndexTransformInv = {
     forAll(negMatcherIndexTransformTestDataInv) {
       (inSeq) => {
-        intercept[HamletError] {
+        intercept[MaenError] {
           negMatcherIndexTransform(inSeq)
         }
       }

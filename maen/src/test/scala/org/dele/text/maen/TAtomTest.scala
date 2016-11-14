@@ -1,8 +1,8 @@
 package org.dele.text.maen
 
 import org.dele.text.maen.test.TestAtom.Atom
-import org.dele.text.maen.utils.HamletError
-import org.dele.text.maen.utils.HamletError
+import org.dele.text.maen.utils.MaenError
+import org.dele.text.maen.utils.MaenError
 import org.scalatest.ShouldMatchers
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.Tables.Table
@@ -59,7 +59,7 @@ class TAtomTest extends TestNGSuite with ShouldMatchers with TableDrivenProperty
             v match {
               case Failure(x) => {
                 x match {
-                  case e:HamletError => println(e.describe)
+                  case e:MaenError => println(e.describe)
                   case xx => fail("Expects AtomErrorMultvalueProp, but get %s instead".format(xx.getClass))
                 }
               }
