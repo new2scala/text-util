@@ -13,6 +13,7 @@ object EntityDataExtractor extends App {
 
   import tgz.TgzUtil._
   val defaultEncoding = "UTF-8"
+
   def extractOne(in:InputStream):Map[String,EntDetail] = {
     val instr = IOUtils.toString(in, defaultEncoding)
     val entData = EntityData.Ser.p(instr)
