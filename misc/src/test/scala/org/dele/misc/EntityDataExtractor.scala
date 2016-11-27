@@ -29,43 +29,44 @@ object EntityDataExtractor extends App {
     sortedGroups.foreach{ g =>
       println(s"${g._1} (${g._2.size})")
       val sorted = sortByCreatedDesc(g._2.values.toSeq)
-      sorted.foreach(e => println(s"\t$e}"))
+      sorted.foreach(e => println(s"\t$e"))
     }
   }
 
   def sortByCreatedDesc(seq:Seq[EntDetail]):Seq[EntDetail] = seq.sortBy(_.created)(Ordering[Option[String]].reverse)
 
-  def processBatch(em:Map[String,EntDetail], tag:String) = {
+  def processBatch(em:Map[String,EntDetail], tag:String, latestCount:Int) = {
     val checkedEntities = em.toList.filter(_._2.curated == 1).toMap
     println("=====================================================\n")
     println(s"\n\n================== batch tag $tag ===================\n\n")
     println("=====================================================\n")
     println(s"Checked entity count: ${checkedEntities.size}")
     //val checkedByDate = checkedEntities.sortBy(_._2.created)(Ordering[Option[String]].reverse).take(20)
-    processGroupByDate(checkedEntities, 5)
+    processGroupByDate(checkedEntities, latestCount)
     //val uncheckedByDate = em.toIndexedSeq.sortBy(_._2.created)(Ordering[Option[String]].reverse).take(30)
     //println(checkedByDate.map(_._2).mkString("\n"))
     println("\n\n=====================================================\n\n")
     //println(uncheckedByDate.map(_._2).mkString("\n"))
-    processGroupByDate(em, 5)
+    processGroupByDate(em, latestCount)
   }
 
-  def checkAndCompare(path1:String, path2:String) = {
+  def checkAndCompare(path1:String, path2:String, latestCount:Int) = {
     val entMap1 = extract(path1)
-    processBatch(entMap1, path1)
+    processBatch(entMap1, path1, latestCount)
 
     val entMap2 = extract(path2)
-    processBatch(entMap2, path2)
+    processBatch(entMap2, path2, latestCount)
 
     val diff = (entMap1.toSet -- entMap2.toSet).toMap
 
     println("\n\n======================== Diff =======================\n\n")
     //  println(diff.map(_._2).mkString("\n"))
-    processBatch(diff, "diff")
+    processBatch(diff, "diff", latestCount)
   }
 
   checkAndCompare(
-    "E:\\VMShare\\malware-161126-12.tgz",
-    "E:\\VMShare\\malware.tgz"
+    "E:\\VMShare\\attack-vector-161127-21.tgz",
+    "E:\\VMShare\\attack-vector-161126-12.tgz",
+    10
   )
 }
