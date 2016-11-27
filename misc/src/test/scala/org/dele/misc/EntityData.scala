@@ -1,5 +1,6 @@
 package org.dele.misc
 
+import org.joda.time.DateTime
 import org.json4s.{CustomSerializer, DefaultFormats, Extraction}
 import org.json4s.JsonAST.{JField, JObject}
 import org.json4s.jackson.JsonMethods._
@@ -11,7 +12,15 @@ import scala.collection.mutable.ListBuffer
   */
 object EntityData {
 
-  case class EntDetail(name:String, `type`: String, longname:Option[String], created: Option[String], curated: Int)
+  private val dateTimePattern = """(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.(\d{3})Z""".r
+  case class EntDetail(name:String, `type`: String, longname:Option[String], created: Option[String], curated: Int) {
+    def createdTime:Option[DateTime] = {
+      created.map{ c =>
+        val dateTimePattern(year, month, day, hour, minute, second, millisecond) = c
+        new DateTime(year.toInt, month.toInt, day.toInt, hour.toInt, minute.toInt, second.toInt, millisecond.toInt)
+      }
+    }
+  }
   case class EntityDetails(entMap:Map[String,EntDetail])
   case class EntData(next_page_start: Option[String], status: String, entities: Array[String], entity_details: EntityDetails)
 

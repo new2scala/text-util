@@ -23,7 +23,7 @@ object TgzUtil {
     val resultList = ListBuffer[T]()
     while (tarEntry != null) {
       val fileOrDir = if (tarEntry.isDirectory) "DIR" else "FILE"
-      println(s"Extracting [${tarEntry.getName}]($fileOrDir)")
+      //println(s"Extracting [${tarEntry.getName}]($fileOrDir)")
 
       if (!tarEntry.isDirectory) {
         resultList += handler(tarIn)
