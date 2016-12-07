@@ -9,7 +9,7 @@ import org.dele.misc.EntityData.EntDetail
 /**
   * Created by jiaji on 11/26/2016.
   */
-object EntityDataExtractor extends App {
+object EntityDataFilter extends App {
 
   import tgz.TgzUtil._
   val defaultEncoding = "UTF-8"
@@ -17,7 +17,7 @@ object EntityDataExtractor extends App {
   def extractOne(in:InputStream):Map[String,EntDetail] = {
     val instr = IOUtils.toString(in, defaultEncoding)
     val entData = EntityData.Ser.p(instr)
-    entData.entity_details.entMap
+    entData.entity_details.entMap.filter(_._2.curated == 1)
   }
 
   def extract(path:String):Map[String, EntDetail] = processAllFiles(path, extractOne).reduce(_ ++ _)
@@ -50,23 +50,12 @@ object EntityDataExtractor extends App {
     processGroupByDate(em, latestCount)
   }
 
-  def checkAndCompare(path1:String, path2:String, latestCount:Int) = {
-    val entMap1 = extract(path1)
-    processBatch(entMap1, path1, latestCount)
-
-    val entMap2 = extract(path2)
-    processBatch(entMap2, path2, latestCount)
-
-    val diff = (entMap1.toSet -- entMap2.toSet).toMap
-
-    println("\n\n======================== Diff =======================\n\n")
-    //  println(diff.map(_._2).mkString("\n"))
-    processBatch(diff, "diff", latestCount)
+  def checked(path:String) = {
+    val entMap = extract(path)
+    println(entMap.keys.mkString("[\"", "\", \"", "\"]"))
   }
 
-  checkAndCompare(
-    "E:\\VMShare\\malware-161206-17.tgz",
-    "E:\\VMShare\\malware-161205-12.tgz",
-    15
+  checked(
+    "E:\\VMShare\\facility-161129-21.tgz"
   )
 }
