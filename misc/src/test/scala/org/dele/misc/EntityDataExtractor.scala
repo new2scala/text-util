@@ -65,8 +65,8 @@ object EntityDataExtractor extends App {
   }
 
   checkAndCompare(
+    "E:\\VMShare\\malware-161208-10.tgz",
     "E:\\VMShare\\malware-161206-17.tgz",
-    "E:\\VMShare\\malware-161205-12.tgz",
     15
   )
 }
