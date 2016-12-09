@@ -13,6 +13,7 @@ lazy val commonSettings = Seq(
     "joda-time" % "joda-time" % "2.9.4",
     "org.apache.commons" % "commons-compress" % "1.12",
     "commons-io" % "commons-io" % "2.5",
+    "org.jsoup" % "jsoup" % "1.9.2",
     "org.testng" % "testng" % "6.9.10"
   )
 )
