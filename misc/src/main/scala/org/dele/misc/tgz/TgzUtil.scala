@@ -11,9 +11,9 @@ import scala.collection.mutable.ListBuffer
   * Created by jiaji on 11/26/2016.
   */
 object TgzUtil {
-  type TgzFileHandler[T] = InputStream => T
+  type FileHandler[T] = InputStream => T
 
-  def processAllFiles[T](path:String, handler:TgzFileHandler[T]):List[T] = {
+  def processAllFiles[T](path:String, handler:FileHandler[T]):List[T] = {
     val bfFileInputStream = new BufferedInputStream(new FileInputStream(path))
 
     val tarIn = new TarArchiveInputStream(new GzipCompressorInputStream(bfFileInputStream))
@@ -45,5 +45,13 @@ object TgzUtil {
 
     tarIn.close()
     resultList.toList
+  }
+
+  def processGzFile[T](path:String, handler:FileHandler[T]):Unit = {
+    val bfFileInputStream = new BufferedInputStream(new FileInputStream(path))
+    val gzIn = new GzipCompressorInputStream(bfFileInputStream)
+    handler(gzIn)
+    gzIn.close()
+    bfFileInputStream.close()
   }
 }
