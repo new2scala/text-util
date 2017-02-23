@@ -13,20 +13,20 @@ import scala.collection.mutable.ListBuffer
   */
 object ExtractMeta extends App {
 
+  def readOne(xmlStr:String):String = {
+    import org.json4s.Xml.toJson
+    import org.json4s.jackson.JsonMethods._
+    import scala.xml
+    val x = xml.XML.loadString(xmlStr)
+    val j = toJson(x)
+    return pretty(j)
+  }
+
   def showText(s:InputStream):Unit = {
     /*
     val buf = new Array[Byte](4096)
     s.read(buf)
     */
-    def readOne(xmlStr:String):String = {
-      import org.json4s.Xml.toJson
-      import org.json4s.jackson.JsonMethods._
-      import scala.xml
-      val x = xml.XML.loadString(xmlStr)
-      val j = toJson(x)
-      return pretty(j)
-    }
-
     val str = IOUtils.toString(s, StandardCharsets.UTF_8)
     var resultJsons = ListBuffer[String]()
     var buf = ListBuffer[String]()
@@ -42,9 +42,23 @@ object ExtractMeta extends App {
         resultJsons += readOne(buf.mkString("\n"))
       }
     }
-    val os = new FileOutputStream("/home/dele/tmp/med.json")
-    IOUtils.write(resultJsons.mkString("\n"), os, StandardCharsets.UTF_8)
+
+    writeInBatch(resultJsons.toArray, 3000, "/home/dele/tmp/medline17n0885")
   }
 
-  TgzUtil.processGzFile("/home/dele/tmp/med.gz", showText)
+  private def writeInBatch(jsons:Array[String], batchSize:Int, baseName:String):Unit = {
+    val batchCount = (jsons.length-1) / batchSize + 1
+    var currData = jsons
+    (0 until batchCount).foreach{ batchIdx =>
+      val (currBatch, remaining) = if (currData.length > batchSize) currData.splitAt(batchSize) else (currData, Array[String]())
+
+      val ofs = new FileOutputStream(f"$baseName$batchIdx%03d.json")
+      IOUtils.write(currBatch.mkString("[", ",\n", "]"), ofs, StandardCharsets.UTF_8)
+      ofs.close()
+
+      currData = remaining
+    }
+  }
+
+  TgzUtil.processGzFile("/home/dele/tmp/medline17n0885.xml.gz", showText)
 }

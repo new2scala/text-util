@@ -6,7 +6,18 @@ import org.json4s.{DefaultFormats, FieldSerializer}
   * Created by dele on 2017-02-23.
   */
 
-class _Author(val ValidYN: String, val LastName: String, val ForeName: String, val Initials: String)
+class _AffiliationInfo(Affiliation: String)
+class _Author(
+               val ValidYN: String,
+               val LastName: Option[String],
+               val ForeName: Option[String],
+               val Suffix: Option[String],
+               val Initials: Option[String],
+               val AffiliationInfo: List[_AffiliationInfo],
+               val CollectiveName: Option[String]) {
+  def isIndividual = CollectiveName.isEmpty
+  def isCollective = CollectiveName.nonEmpty
+}
 class _AuthorList(val CompleteYN: String, val Author: List[_Author])
 
 class _Grant(val GrantId:String, val Agency: String, val Country: String)
