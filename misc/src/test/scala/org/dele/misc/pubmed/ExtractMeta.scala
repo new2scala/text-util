@@ -18,8 +18,13 @@ object ExtractMeta extends App {
     import org.json4s.jackson.JsonMethods._
     import scala.xml
     val x = xml.XML.loadString(xmlStr)
+    val authors = x \ "MedlineCitation" \ "Article" \ "AuthorList" \ "Author"
+    authors.foreach{ author =>
+      val n = author \ "LastName"
+      println(n.text)
+    }
     val j = toJson(x)
-    return pretty(j)
+    pretty(j)
   }
 
   def showText(s:InputStream):Unit = {
