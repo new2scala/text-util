@@ -7,16 +7,54 @@ import org.apache.commons.io.IOUtils
 import org.dele.misc.tgz.TgzUtil
 
 import scala.collection.mutable.ListBuffer
+import scala.xml.NodeSeq
 
 /**
   * Created by dele on 2017-02-22.
   */
 object ExtractMeta extends App {
+  import scala.xml
+
+  def node2Str(n:NodeSeq):Option[String] = if (n.isEmpty) None else Option(n.text)
+  def extractAuthors(authorListNode:NodeSeq):_AuthorList = {
+    val authorNodes = authorListNode \ "Author"
+    val authors = authorNodes.map { author =>
+      val affiNodes = author \ "AffiliationInfo"
+      val affis = affiNodes.map{ n =>
+        val aff = (n \ "Affiliation").text
+        _AffiliationInfo(aff)
+      }.toList
+      //if (affis.size > 1) {
+      //  println(affis)
+      //}
+      new _Author(
+        ValidYN = node2Str(author \ "@ValidYN"),
+        LastName = node2Str(author \ "LastName"),
+        ForeName = node2Str(author \ "ForeName"),
+        Suffix = node2Str(author \ "Suffix"),
+        Initials = node2Str(author \ "Initials"),
+        AffiliationInfo = affis,
+        CollectiveName = node2Str(author \ "CollectiveName")
+      )
+    }.toList
+    _AuthorList(None, authors)
+  }
+
+  def extractFromXml(xmlStr:String):_PubmedArticle = {
+    val x:NodeSeq = xml.XML.loadString(xmlStr)
+    val authorListNode = x \ "MedlineCitation" \ "Article" \ "AuthorList"
+
+    val authorList = extractAuthors(authorListNode)
+    _PubmedArticle(null, null)
+  }
 
   def readOne(xmlStr:String):String = {
     import org.json4s.Xml.toJson
     import org.json4s.jackson.JsonMethods._
-    import scala.xml
+
+    extractFromXml(xmlStr)
+
+    /*
     val x = xml.XML.loadString(xmlStr)
     val authors = x \ "MedlineCitation" \ "Article" \ "AuthorList" \ "Author"
     authors.foreach{ author =>
@@ -25,6 +63,8 @@ object ExtractMeta extends App {
     }
     val j = toJson(x)
     pretty(j)
+    */
+    ""
   }
 
   def showText(s:InputStream):Unit = {
