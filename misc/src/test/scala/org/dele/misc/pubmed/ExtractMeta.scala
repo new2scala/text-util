@@ -15,36 +15,12 @@ import scala.xml.NodeSeq
 object ExtractMeta extends App {
   import scala.xml
 
-  def node2Str(n:NodeSeq):Option[String] = if (n.isEmpty) None else Option(n.text)
-  def extractAuthors(authorListNode:NodeSeq):_AuthorList = {
-    val authorNodes = authorListNode \ "Author"
-    val authors = authorNodes.map { author =>
-      val affiNodes = author \ "AffiliationInfo"
-      val affis = affiNodes.map{ n =>
-        val aff = (n \ "Affiliation").text
-        _AffiliationInfo(aff)
-      }.toList
-      //if (affis.size > 1) {
-      //  println(affis)
-      //}
-      new _Author(
-        ValidYN = node2Str(author \ "@ValidYN"),
-        LastName = node2Str(author \ "LastName"),
-        ForeName = node2Str(author \ "ForeName"),
-        Suffix = node2Str(author \ "Suffix"),
-        Initials = node2Str(author \ "Initials"),
-        AffiliationInfo = affis,
-        CollectiveName = node2Str(author \ "CollectiveName")
-      )
-    }.toList
-    _AuthorList(None, authors)
-  }
 
   def extractFromXml(xmlStr:String):_PubmedArticle = {
     val x:NodeSeq = xml.XML.loadString(xmlStr)
     val authorListNode = x \ "MedlineCitation" \ "Article" \ "AuthorList"
 
-    val authorList = extractAuthors(authorListNode)
+    //val authorList = extractAuthors(authorListNode)
     _PubmedArticle(null, null)
   }
 
