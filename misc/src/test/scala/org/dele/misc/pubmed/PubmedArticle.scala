@@ -2,6 +2,8 @@ package org.dele.misc.pubmed
 
 import org.json4s.{DefaultFormats, FieldSerializer}
 
+import scala.xml.NodeSeq
+
 /**
   * Created by dele on 2017-02-23.
   */
@@ -27,9 +29,26 @@ class _GrantList(val Grant: List[_Grant])
 
 class _MeshHeading(val DescriptorName: String, val QualifierName: String)
 
-class _Journal(val Title: String)
+case class _Journal(
+                     ISSN: Option[String],
+                     Title: Option[String]
+                   )
 
-class _Article(val Journal: _Journal, val ArticleTitle: String, val AuthorList: _AuthorList, val Language: String)
+case class _AbstractText(
+                        Label: Option[String],
+                        NlmCategory: Option[String],
+                        Text: String
+                        )
+case class _Abstract(
+                      AbstractText: List[_AbstractText]
+                    )
+case class _Article(
+                     Journal: _Journal,
+                     ArticleTitle: Option[String],
+                     Abstract: Option[_Abstract],
+                     AuthorList: _AuthorList,
+                     Language: Option[String]
+                   )
 
 class _MedlineCitation(val PMID: String, val Article: _Article)
 
@@ -59,7 +78,6 @@ object PubmedArticle {
   )
   implicit val format = DefaultFormats
   def fromJson(j:String):_PubmedArticle = {
-
     parse(j).extract[_PubmedArticle]
   }
 }
