@@ -42,10 +42,11 @@ object EmployeeTests extends App {
   val orders = spark.read.option("header", "true").csv("res/data/NW-Orders.csv").as[Order]
   orders.show(5)
 
-  import org.apache.spark.sql.catalyst.ScalaReflection
-  val schema = ScalaReflection.schemaFor[OrderDetails].dataType.asInstanceOf[StructType]
+  //import org.apache.spark.sql.catalyst.ScalaReflection
+  //val schema = ScalaReflection.schemaFor[OrderDetails].dataType.asInstanceOf[StructType]
   val orderDetails = spark.read
-    .schema(schema)
+    //.schema(schema)
+    .option("inferSchema", "true")
     .option("header", "true")
     .csv("res/data/NW-Order-Details.csv").as[OrderDetails]
   //orderDetails.printSchema()
