@@ -10,6 +10,10 @@ import scala.xml.NodeSeq
 
 import PubmedArticle._
 
+case class _Identifier(
+                      Source:Option[String],
+                      Content:String
+                      )
 case class _AffiliationInfo(Affiliation: String)
 case class _Author(
                ValidYN: Option[String] = None,
@@ -17,6 +21,7 @@ case class _Author(
                ForeName: Option[String] = None,
                Suffix: Option[String] = None,
                Initials: Option[String] = None,
+               Identifier: Option[_Identifier],
                AffiliationInfo: List[_AffiliationInfo] = EmptyAffiliationList,
                CollectiveName: Option[String] = None) {
   def isIndividual = CollectiveName.isEmpty

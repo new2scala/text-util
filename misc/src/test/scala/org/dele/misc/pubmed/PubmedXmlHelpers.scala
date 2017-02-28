@@ -8,6 +8,12 @@ import scala.xml.NodeSeq
 object PubmedXmlHelpers {
   def node2Str(n:NodeSeq):Option[String] = if (n.isEmpty) None else Option(n.text)
 
+  def xml2Identifier(idNode: NodeSeq): _Identifier = {
+    val source = idNode \ "@Source"
+
+    _Identifier(node2Str(source), idNode.text)
+  }
+
   def xml2Author(author: NodeSeq):_Author = {
     val affiNodes = author \ "AffiliationInfo"
     val affis = affiNodes.map{ n =>
@@ -15,12 +21,15 @@ object PubmedXmlHelpers {
       _AffiliationInfo(aff)
     }.toList
 
-    new _Author(
+    val idNode = author \ "Identifier"
+
+    _Author(
       ValidYN = node2Str(author \ "@ValidYN"),
       LastName = node2Str(author \ "LastName"),
       ForeName = node2Str(author \ "ForeName"),
       Suffix = node2Str(author \ "Suffix"),
       Initials = node2Str(author \ "Initials"),
+      if (idNode.isEmpty) None else Option(xml2Identifier(idNode)),
       AffiliationInfo = affis,
       CollectiveName = node2Str(author \ "CollectiveName")
     )
