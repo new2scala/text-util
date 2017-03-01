@@ -2,6 +2,7 @@ name := "text utilities"
 
 lazy val json4sVersion = "3.4.2"
 lazy val sparkVersion = "2.1.0"
+lazy val akkaVersion = "2.4.17"
 lazy val commonSettings = Seq(
   organization := "org.dele",
   version := "0.1.0",
@@ -11,6 +12,7 @@ lazy val commonSettings = Seq(
     "org.json4s" %% "json4s-jackson" % json4sVersion,
     "org.apache.spark" %% "spark-core" % sparkVersion,
     "org.apache.spark" %% "spark-sql" % sparkVersion,
+    "com.typesafe.akka" %% "akka-actor" % akkaVersion,
     "joda-time" % "joda-time" % "2.9.4",
     "org.apache.commons" % "commons-compress" % "1.12",
     "commons-io" % "commons-io" % "2.5",
