@@ -1,0 +1,135 @@
+[0m[[0minfo[0m] [0mSet current project to text utilities (in build file:/home/dele/projs/spark2/text-util/)[0m
+[0m[[0minfo[0m] [0mroot/compile:compile = Task[sbt.inc.Analysis][0m
+[0m[[0minfo[0m] [0m  +-root/compile:incCompileSetup = Task[sbt.Compiler$IncSetup][0m
+[0m[[0minfo[0m] [0m  | +-*/*:skip = Task[Boolean][0m
+[0m[[0minfo[0m] [0m  | +-root/compile:compileAnalysisFilename = Task[java.lang.String][0m
+[0m[[0minfo[0m] [0m  | | +-*/*:crossPaths = true[0m
+[0m[[0minfo[0m] [0m  | | +-root/*:scalaBinaryVersion = 2.11[0m
+[0m[[0minfo[0m] [0m  | | [0m
+[0m[[0minfo[0m] [0m  | +-*/*:compilerCache = Task[xsbti.compile.GlobalsCache][0m
+[0m[[0minfo[0m] [0m  | +-*/*:definesClass = Task[scala.Function1[java.io.File, scala.Function1[java.lang.String, Boolean]]][0m
+[0m[[0minfo[0m] [0m  | +-root/compile:dependencyClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m  | | +-root/compile:dependencyClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | | [0m
+[0m[[0minfo[0m] [0m  | | +-root/compile:externalDependencyClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m  | | | +-root/compile:externalDependencyClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | | | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | | | [0m
+[0m[[0minfo[0m] [0m  | | | +-root/compile:managedClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m  | | | | +-root/compile:classpathConfiguration = Task[sbt.Configuration][0m
+[0m[[0minfo[0m] [0m  | | | | | +-root/compile:configuration = compile[0m
+[0m[[0minfo[0m] [0m  | | | | | +-*/*:internalConfigurationMap = <function1>[0m
+[0m[[0minfo[0m] [0m  | | | | | +-root/*:update = Task[sbt.UpdateReport][0m
+[0m[[0minfo[0m] [0m  | | | | | [0m
+[0m[[0minfo[0m] [0m  | | | | +-*/*:classpathTypes = Set(eclipse-plugin, bundle, scala-jar, hk2-jar, orbit, jar)[0m
+[0m[[0minfo[0m] [0m  | | | | +-root/compile:managedClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | | | | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | | | | [0m
+[0m[[0minfo[0m] [0m  | | | | +-root/*:update = Task[sbt.UpdateReport][0m
+[0m[[0minfo[0m] [0m  | | | | [0m
+[0m[[0minfo[0m] [0m  | | | +-root/compile:unmanagedClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m  | | |   +-*/*:buildDependencies = sbt.BuildDependencies@74a820bf[0m
+[0m[[0minfo[0m] [0m  | | |   +-root/compile:configuration = compile[0m
+[0m[[0minfo[0m] [0m  | | |   +-*/*:settingsData = Task[sbt.Settings[sbt.Scope]][0m
+[0m[[0minfo[0m] [0m  | | |   +-root/*:thisProjectRef = ProjectRef(file:/home/dele/projs/spark2/text-util/,root)[0m
+[0m[[0minfo[0m] [0m  | | |   +-root/compile:unmanagedClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | |     +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | |     [0m
+[0m[[0minfo[0m] [0m  | | +-root/compile:internalDependencyClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m  | |   +-*/*:buildDependencies = sbt.BuildDependencies@74a820bf[0m
+[0m[[0minfo[0m] [0m  | |   +-root/compile:classpathConfiguration = Task[sbt.Configuration][0m
+[0m[[0minfo[0m] [0m  | |   | +-root/compile:configuration = compile[0m
+[0m[[0minfo[0m] [0m  | |   | +-*/*:internalConfigurationMap = <function1>[0m
+[0m[[0minfo[0m] [0m  | |   | +-root/*:update = Task[sbt.UpdateReport][0m
+[0m[[0minfo[0m] [0m  | |   | [0m
+[0m[[0minfo[0m] [0m  | |   +-root/compile:configuration = compile[0m
+[0m[[0minfo[0m] [0m  | |   +-root/compile:internalDependencyClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | |   | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | |   | [0m
+[0m[[0minfo[0m] [0m  | |   +-*/*:settingsData = Task[sbt.Settings[sbt.Scope]][0m
+[0m[[0minfo[0m] [0m  | |   +-root/*:thisProjectRef = ProjectRef(file:/home/dele/projs/spark2/text-util/,root)[0m
+[0m[[0minfo[0m] [0m  | |   +-*/*:trackInternalDependencies = TrackAlways[0m
+[0m[[0minfo[0m] [0m  | |   [0m
+[0m[[0minfo[0m] [0m  | +-root/compile:incCompileSetup::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m  | | [0m
+[0m[[0minfo[0m] [0m  | +-root/*:incOptions = Task[sbt.inc.IncOptions][0m
+[0m[[0minfo[0m] [0m  | [0m
+[0m[[0minfo[0m] [0m  +-root/compile:manipulateBytecode = Task[sbt.compiler.IC$Result][0m
+[0m[[0minfo[0m] [0m    +-root/compile:compileIncremental = Task[sbt.compiler.IC$Result][0m
+[0m[[0minfo[0m] [0m      +-root/compile:compile::compileInputs = Task[sbt.Compiler$Inputs][0m
+[0m[[0minfo[0m] [0m      | +-root/compile:classDirectory = target/scala-2.11/classes[0m
+[0m[[0minfo[0m] [0m      | +-*/*:compileOrder = Mixed[0m
+[0m[[0minfo[0m] [0m      | +-root/*:compilers = Task[sbt.Compiler$Compilers][0m
+[0m[[0minfo[0m] [0m      | +-root/compile:dependencyClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m      | +-root/compile:incCompileSetup = Task[sbt.Compiler$IncSetup][0m
+[0m[[0minfo[0m] [0m      | +-*/*:javacOptions = Task[scala.collection.Seq[java.lang.String]][0m
+[0m[[0minfo[0m] [0m      | +-*/*:maxErrors = 100[0m
+[0m[[0minfo[0m] [0m      | +-root/compile:scalacOptions = Task[scala.collection.Seq[java.lang.String]][0m
+[0m[[0minfo[0m] [0m      | +-*/*:sourcePositionMappers = Task[scala.collection.Seq[scala.Function1[xsbti.Position, scala.Option[xsbti.Position]]]][0m
+[0m[[0minfo[0m] [0m      | +-root/compile:sources = Task[scala.collection.Seq[java.io.File]][0m
+[0m[[0minfo[0m] [0m      | +-root/compile:compile::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m      |   +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m      |   [0m
+[0m[[0minfo[0m] [0m      +-root/compile:compile::compilerReporter = Task[scala.Option[xsbti.Reporter]][0m
+[0m[[0minfo[0m] [0m      +-root/compile:compileIncremental::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m      | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m      | [0m
+[0m[[0minfo[0m] [0m      +-root/compile:readAnalysis = Task[sbt.Compiler$PreviousAnalysis][0m
+[0m[[0minfo[0m] [0m        +-root/compile:incCompileSetup = Task[sbt.Compiler$IncSetup][0m
+[0m[[0minfo[0m] [0m          +-*/*:skip = Task[Boolean][0m
+[0m[[0minfo[0m] [0m          +-root/compile:compileAnalysisFilename = Task[java.lang.String][0m
+[0m[[0minfo[0m] [0m          | +-*/*:crossPaths = true[0m
+[0m[[0minfo[0m] [0m          | +-root/*:scalaBinaryVersion = 2.11[0m
+[0m[[0minfo[0m] [0m          | [0m
+[0m[[0minfo[0m] [0m          +-*/*:compilerCache = Task[xsbti.compile.GlobalsCache][0m
+[0m[[0minfo[0m] [0m          +-*/*:definesClass = Task[scala.Function1[java.io.File, scala.Function1[java.lang.String, Boolean]]][0m
+[0m[[0minfo[0m] [0m          +-root/compile:dependencyClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m          | +-root/compile:dependencyClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | | [0m
+[0m[[0minfo[0m] [0m          | +-root/compile:externalDependencyClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m          | | +-root/compile:externalDependencyClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | | | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | | | [0m
+[0m[[0minfo[0m] [0m          | | +-root/compile:managedClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m          | | | +-root/compile:classpathConfiguration = Task[sbt.Configuration][0m
+[0m[[0minfo[0m] [0m          | | | | +-root/compile:configuration = compile[0m
+[0m[[0minfo[0m] [0m          | | | | +-*/*:internalConfigurationMap = <function1>[0m
+[0m[[0minfo[0m] [0m          | | | | +-root/*:update = Task[sbt.UpdateReport][0m
+[0m[[0minfo[0m] [0m          | | | | [0m
+[0m[[0minfo[0m] [0m          | | | +-*/*:classpathTypes = Set(eclipse-plugin, bundle, scala-jar, hk2-jar, orbit, jar)[0m
+[0m[[0minfo[0m] [0m          | | | +-root/compile:managedClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | | | | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | | | | [0m
+[0m[[0minfo[0m] [0m          | | | +-root/*:update = Task[sbt.UpdateReport][0m
+[0m[[0minfo[0m] [0m          | | | [0m
+[0m[[0minfo[0m] [0m          | | +-root/compile:unmanagedClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m          | |   +-*/*:buildDependencies = sbt.BuildDependencies@74a820bf[0m
+[0m[[0minfo[0m] [0m          | |   +-root/compile:configuration = compile[0m
+[0m[[0minfo[0m] [0m          | |   +-*/*:settingsData = Task[sbt.Settings[sbt.Scope]][0m
+[0m[[0minfo[0m] [0m          | |   +-root/*:thisProjectRef = ProjectRef(file:/home/dele/projs/spark2/text-util/,root)[0m
+[0m[[0minfo[0m] [0m          | |   +-root/compile:unmanagedClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | |     +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | |     [0m
+[0m[[0minfo[0m] [0m          | +-root/compile:internalDependencyClasspath = Task[scala.collection.Seq[sbt.Attributed[java.io.File]]][0m
+[0m[[0minfo[0m] [0m          |   +-*/*:buildDependencies = sbt.BuildDependencies@74a820bf[0m
+[0m[[0minfo[0m] [0m          |   +-root/compile:classpathConfiguration = Task[sbt.Configuration][0m
+[0m[[0minfo[0m] [0m          |   | +-root/compile:configuration = compile[0m
+[0m[[0minfo[0m] [0m          |   | +-*/*:internalConfigurationMap = <function1>[0m
+[0m[[0minfo[0m] [0m          |   | +-root/*:update = Task[sbt.UpdateReport][0m
+[0m[[0minfo[0m] [0m          |   | [0m
+[0m[[0minfo[0m] [0m          |   +-root/compile:configuration = compile[0m
+[0m[[0minfo[0m] [0m          |   +-root/compile:internalDependencyClasspath::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          |   | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          |   | [0m
+[0m[[0minfo[0m] [0m          |   +-*/*:settingsData = Task[sbt.Settings[sbt.Scope]][0m
+[0m[[0minfo[0m] [0m          |   +-root/*:thisProjectRef = ProjectRef(file:/home/dele/projs/spark2/text-util/,root)[0m
+[0m[[0minfo[0m] [0m          |   +-*/*:trackInternalDependencies = TrackAlways[0m
+[0m[[0minfo[0m] [0m          |   [0m
+[0m[[0minfo[0m] [0m          +-root/compile:incCompileSetup::streams = Task[sbt.std.TaskStreams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | +-*/*:streamsManager = Task[sbt.std.Streams[sbt.Init$ScopedKey[_ <: Any]]][0m
+[0m[[0minfo[0m] [0m          | [0m
+[0m[[0minfo[0m] [0m          +-root/*:incOptions = Task[sbt.inc.IncOptions][0m
+[0m[[0minfo[0m] [0m          [0m

@@ -1,6 +1,6 @@
 name := "text utilities"
 
-lazy val json4sVersion = "3.4.2"
+lazy val json4sVersion = "3.2.11"
 lazy val sparkVersion = "2.1.0"
 lazy val akkaVersion = "2.4.17"
 lazy val commonSettings = Seq(

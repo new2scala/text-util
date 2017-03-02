@@ -52,5 +52,17 @@ object EmployeeTests extends App {
   //orderDetails.printSchema()
   orderDetails.show(5)
 
+  orderDetails.orderBy($"Qty".desc).show(10)
+
+  orders.createTempView("OrderTable")
+  orderDetails.createTempView("OrderDetailTable")
+  val groupByCountryResult = spark.sql(
+    "SELECT ShipCountry, SUM(OrderDetailTable.UnitPrice * Qty * Discount) AS ProductSales FROM OrderTable INNER JOIN OrderDetailTable on OrderTable.OrderID = OrderDetailTable.OrderID GROUP BY ShipCountry"
+  )
+
+  println(groupByCountryResult.count())
+  groupByCountryResult.show(10)
+  groupByCountryResult.orderBy($"ProductSales".desc).show(10)
+
   spark.close()
 }
