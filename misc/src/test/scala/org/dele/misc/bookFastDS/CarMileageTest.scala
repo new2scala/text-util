@@ -26,5 +26,15 @@ object CarMileageTest extends App {
   import org.apache.spark.sql.functions._
   milData.agg(stddev(milData("mpg")), avg(milData("torque"))).show()
 
+  val cor = milData.stat.corr("hp", "weight")
+  println(f"'hp' to 'weight' correlation: $cor%.4f")
+  val cov = milData.stat.cov("hp", "weight")
+  println(f"'hp' to 'weight' covariance: $cov%.4f")
+
+  val crosstab = milData.stat.crosstab("automatic", "NoOfSpeed")
+  crosstab.show()
+  val crosstab2 = milData.stat.crosstab("hp", "weight")
+  crosstab2.show()
+
   spark.close()
 }
