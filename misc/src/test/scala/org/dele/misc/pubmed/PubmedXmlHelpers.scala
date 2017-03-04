@@ -1,12 +1,24 @@
 package org.dele.misc.pubmed
 
-import scala.xml.NodeSeq
+import scala.xml.{Elem, NodeSeq}
 
 /**
   * Created by dele on 2017-02-25.
   */
 object PubmedXmlHelpers {
   def node2Str(n:NodeSeq):Option[String] = if (n.isEmpty) None else Option(n.text)
+
+  def nodeAttrKeys(n:Elem):Set[String] = n.attributes.map(_.key).toSet
+
+  def nodeCheck(n:NodeSeq, attrs:Array[String], elems:Array[String]):Set[String] = {
+    val elem = n.asInstanceOf[Elem]
+    val rem = nodeAttrKeys(elem) -- attrs
+    if (rem.nonEmpty) {
+      val unhandledAttrs = rem.mkString(",")
+      println(s"In label <${elem.label}> attributes [$unhandledAttrs] not handled")
+    }
+    rem
+  }
 
   def xml2Identifier(idNode: NodeSeq): _Identifier = {
     val source = idNode \ "@Source"

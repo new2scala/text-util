@@ -27,6 +27,7 @@ case class _Author(
   def isIndividual = CollectiveName.isEmpty
   def isCollective = CollectiveName.nonEmpty
 }
+
 case class _AuthorList(CompleteYN: Option[String], Authors: List[_Author])
 
 class _Grant(val GrantId:String, val Agency: String, val Country: String)
