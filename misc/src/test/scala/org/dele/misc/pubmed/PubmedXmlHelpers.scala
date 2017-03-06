@@ -1,5 +1,7 @@
 package org.dele.misc.pubmed
 
+import org.dele.misc.pubmed.PubmedXmlStatic.NodeProcData
+
 import scala.xml.{Elem, NodeSeq}
 
 /**
@@ -26,7 +28,12 @@ object PubmedXmlHelpers {
     _Identifier(node2Str(source), idNode.text)
   }
 
+  val authorPD = NodeProcData(
+    "Author", Array("ValidYN"),
+    Array("LastName", "ForeName", "Initials", "Suffix", "Identifier", "AffiliationInfo", "CollectiveName")
+  )
   def xml2Author(author: NodeSeq):_Author = {
+    nodeCheck(author, authorPD.attrs, authorPD.elems)
     val affiNodes = author \ "AffiliationInfo"
     val affis = affiNodes.map{ n =>
       val aff = (n \ "Affiliation").text
