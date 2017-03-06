@@ -7,6 +7,7 @@ import org.apache.commons.io.IOUtils
 import org.dele.misc.tgz.TgzUtil
 
 import scala.collection.mutable.ListBuffer
+import scala.reflect.ClassTag
 import scala.xml.NodeSeq
 
 /**
@@ -15,13 +16,14 @@ import scala.xml.NodeSeq
 object ExtractMeta extends App {
   import scala.xml
 
+  import PubmedXmlHelpers._
 
-  def extractFromXml(xmlStr:String):_PubmedArticle = {
+  def extractFromXml(xmlStr:String):_AuthorList = {
     val x:NodeSeq = xml.XML.loadString(xmlStr)
     val authorListNode = x \ "MedlineCitation" \ "Article" \ "AuthorList"
 
-    //val authorList = extractAuthors(authorListNode)
-    _PubmedArticle(null, null)
+    xml2AuthorList(authorListNode)
+    //_PubmedArticle(null, null)
   }
 
   def readOne(xmlStr:String):String = {
@@ -43,13 +45,16 @@ object ExtractMeta extends App {
     ""
   }
 
-  def showText(s:InputStream):Unit = {
+  type PubmedArticleXmlProcessor[T] = (String => T)
+
+
+  def processAll[T:ClassTag](s:InputStream, articleProcessor: PubmedArticleXmlProcessor[T]):Array[T] = {
     /*
     val buf = new Array[Byte](4096)
     s.read(buf)
     */
     val str = IOUtils.toString(s, StandardCharsets.UTF_8)
-    var resultJsons = ListBuffer[String]()
+    var results = ListBuffer[T]()
     var buf = ListBuffer[String]()
     str.lines.foreach { line =>
       val trim = line.trim
@@ -60,11 +65,13 @@ object ExtractMeta extends App {
       buf += trim
 
       if (trim == "</PubmedArticle>") {
-        resultJsons += readOne(buf.mkString("\n"))
+        results += articleProcessor(buf.mkString("\n"))
       }
     }
 
-    writeInBatch(resultJsons.toArray, 3000, "/home/dele/tmp/medline17n0885")
+    results.toArray
+
+    //writeInBatch(resultJsons.toArray, 3000, "/home/dele/tmp/medline17n0885")
   }
 
   private def writeInBatch(jsons:Array[String], batchSize:Int, baseName:String):Unit = {
@@ -81,5 +88,15 @@ object ExtractMeta extends App {
     }
   }
 
-  TgzUtil.processGzFile("/home/dele/tmp/medline17n0885.xml.gz", showText)
+  def findFirst(is:InputStream):Unit = {
+
+  }
+
+  //TgzUtil.processGzFile("/home/dele/tmp/medline17n0001.xml.gz", showText)
+
+  def readAllAuthors(is:InputStream) = {
+    val authorLists = processAll(is, extractFromXml)
+    authorLists
+  }
+  TgzUtil.processGzFile("/home/dele/tmp/medline17n0001.xml.gz", readAllAuthors)
 }

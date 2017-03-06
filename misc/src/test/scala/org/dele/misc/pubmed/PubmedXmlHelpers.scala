@@ -24,6 +24,10 @@ object PubmedXmlHelpers {
       println(s"In label <${elem.label}> attributes [$unhandledAttrs] not handled")
     }
     val remElems = childElems(elem).map(_.label).toSet -- elems
+    if (remElems.nonEmpty) {
+      val unhandledElems = remElems.mkString(",")
+      println(s"In label <${elem.label}> elements [$unhandledElems] not handled")
+    }
 
     (rem, remElems)
   }
