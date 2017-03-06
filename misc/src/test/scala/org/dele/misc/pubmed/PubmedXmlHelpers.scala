@@ -11,15 +11,21 @@ object PubmedXmlHelpers {
   def node2Str(n:NodeSeq):Option[String] = if (n.isEmpty) None else Option(n.text)
 
   def nodeAttrKeys(n:Elem):Set[String] = n.attributes.map(_.key).toSet
+  def childElems(elem:Elem):Seq[Elem] = elem.child.flatMap{
+    case elem:Elem => Option(elem)
+    case _ => None
+  }
 
-  def nodeCheck(n:NodeSeq, attrs:Array[String], elems:Array[String]):Set[String] = {
-    val elem = n.asInstanceOf[Elem]
+  def nodeCheck(elem:Elem, attrs:Array[String], elems:Array[String]):(Set[String], Set[String]) = {
+    //val elem = n.asInstanceOf[Elem]
     val rem = nodeAttrKeys(elem) -- attrs
     if (rem.nonEmpty) {
       val unhandledAttrs = rem.mkString(",")
       println(s"In label <${elem.label}> attributes [$unhandledAttrs] not handled")
     }
-    rem
+    val remElems = childElems(elem).map(_.label).toSet -- elems
+
+    (rem, remElems)
   }
 
   def xml2Identifier(idNode: NodeSeq): _Identifier = {
@@ -33,7 +39,7 @@ object PubmedXmlHelpers {
     Array("LastName", "ForeName", "Initials", "Suffix", "Identifier", "AffiliationInfo", "CollectiveName")
   )
   def xml2Author(author: NodeSeq):_Author = {
-    nodeCheck(author, authorPD.attrs, authorPD.elems)
+    nodeCheck(author.asInstanceOf[Elem], authorPD.attrs, authorPD.elems)
     val affiNodes = author \ "AffiliationInfo"
     val affis = affiNodes.map{ n =>
       val aff = (n \ "Affiliation").text

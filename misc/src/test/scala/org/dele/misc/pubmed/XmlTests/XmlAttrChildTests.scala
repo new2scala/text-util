@@ -1,5 +1,6 @@
 package org.dele.misc.pubmed.XmlTests
 
+import org.dele.misc.pubmed.PubmedXmlHelpers
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -44,27 +45,26 @@ class XmlAttrChildTests extends FlatSpec with Matchers with TableDrivenPropertyC
 
       val foundAttrs = root.attributes.map(attr => attr.key -> attr.value.text).toMap
       foundAttrs shouldBe attrs
-      val foundChildren = root.child.flatMap{
-        case elem:Elem => Option(elem.label)
-        case _ => None
-      }.toList
+      val foundChildren = PubmedXmlHelpers.childElems(root).map(_.label)
 
       foundChildren shouldBe children
     }
   }
 
+  val emtpyElemArr = Array[String]()
   val nodeCheckTestData = Table(
-    ("xmlStr", "handledAttrs", "unhandledAttrs"),
-    (singleAttr, Array("attr"), Set[String]()),
-    (multiAttr, Array("attr1"), Set("attr2"))
+    ("xmlStr", "handledAttrs", "handledElems", "unhandled"),
+    (singleAttr, Array("attr"), emtpyElemArr, (Set[String](), Set("c1"))),
+    (multiAttr, Array("attr1"), emtpyElemArr, (Set("attr2"), Set[String]())),
+    (multiAttrChildren, Array("attr1"), Array("c1"), (Set("attr2"), Set("c2")))
   )
 
   import org.dele.misc.pubmed.PubmedXmlHelpers._
   "nodeCheck tests" should "pass" in {
-    forAll(nodeCheckTestData) { (xmlStr, handledAttrs, unhandledAttrs) =>
+    forAll(nodeCheckTestData) { (xmlStr, handledAttrs, handledElems, unhandled) =>
       val root = xml.XML.loadString(xmlStr)
-      val ua = nodeCheck(root, handledAttrs, Array())
-      ua shouldBe unhandledAttrs
+      val ua = nodeCheck(root, handledAttrs, handledElems)
+      ua shouldBe unhandled
     }
 
 
