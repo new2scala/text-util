@@ -47,11 +47,12 @@ object TgzUtil {
     resultList.toList
   }
 
-  def processGzFile[T](path:String, handler:FileHandler[T]):Unit = {
+  def processGzFile[T](path:String, handler:FileHandler[T]):T = {
     val bfFileInputStream = new BufferedInputStream(new FileInputStream(path))
     val gzIn = new GzipCompressorInputStream(bfFileInputStream)
-    handler(gzIn)
+    val result = handler(gzIn)
     gzIn.close()
     bfFileInputStream.close()
+    result
   }
 }

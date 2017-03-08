@@ -24,8 +24,17 @@ case class _Author(
                Identifier: Option[_Identifier],
                AffiliationInfo: List[_AffiliationInfo] = EmptyAffiliationList,
                CollectiveName: Option[String] = None) {
+  val emptyLastName = {
+    if (LastName.isEmpty) {
+      true
+    }
+    else false
+  }
   def isIndividual = CollectiveName.isEmpty
   def isCollective = CollectiveName.nonEmpty
+
+  private def _s(x:Option[String]):String = x.getOrElse("")
+  def name2String: Option[String] = if (isIndividual) Option(s"${_s(LastName)}\t\t${_s(ForeName)}\t\t${_s(Initials)}\t\t${_s(Suffix)}") else None
 }
 
 case class _AuthorList(CompleteYN: Option[String], Authors: List[_Author])

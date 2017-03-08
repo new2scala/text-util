@@ -18,13 +18,6 @@ object ExtractMeta extends App {
 
   import PubmedXmlHelpers._
 
-  def extractFromXml(xmlStr:String):_AuthorList = {
-    val x:NodeSeq = xml.XML.loadString(xmlStr)
-    val authorListNode = x \ "MedlineCitation" \ "Article" \ "AuthorList"
-
-    xml2AuthorList(authorListNode)
-    //_PubmedArticle(null, null)
-  }
 
   def readOne(xmlStr:String):String = {
     import org.json4s.Xml.toJson
@@ -94,9 +87,26 @@ object ExtractMeta extends App {
 
   //TgzUtil.processGzFile("/home/dele/tmp/medline17n0001.xml.gz", showText)
 
+  def extractFromXml(xmlStr:String):_AuthorList = {
+    val x:NodeSeq = xml.XML.loadString(xmlStr)
+    val authorListNode = x \ "MedlineCitation" \ "Article" \ "AuthorList"
+
+    xml2AuthorList(authorListNode)
+    //_PubmedArticle(null, null)
+  }
+
   def readAllAuthors(is:InputStream) = {
     val authorLists = processAll(is, extractFromXml)
-    authorLists
+    val allAuthors = authorLists.flatMap(_.Authors)
+    allAuthors
   }
-  TgzUtil.processGzFile("/home/dele/tmp/medline17n0001.xml.gz", readAllAuthors)
+
+  def dumpAuthors(outputFile:String) = {
+    val str = allAuthors.flatMap(_.name2String).distinct.sorted.mkString("\n")
+    val ofs = new FileOutputStream(outputFile)
+    IOUtils.write(str, ofs, StandardCharsets.UTF_8)
+  }
+
+  val allAuthors = TgzUtil.processGzFile("/home/dele/tmp/medline17n0885.xml.gz", readAllAuthors)
+  dumpAuthors("/home/dele/tmp/medline17n0885.authors.distinct.txt")
 }
