@@ -101,12 +101,25 @@ object ExtractMeta extends App {
     allAuthors
   }
 
+  def authors2Str(authors:Iterable[_Author]):String = {
+    val groupedByLN = authors.groupBy(_.LastName).toList.sortBy(_._1)
+    val groupStrs = ListBuffer[String]()
+    groupedByLN.foreach{ g =>
+      groupStrs += g._1.getOrElse("[?]")
+      g._2.flatMap(_.foreName2String).toList.distinct.sorted.foreach{ fn =>
+        groupStrs += s"\t\t$fn"
+      }
+    }
+    groupStrs.mkString("\n")
+  }
+
   def dumpAuthors(outputFile:String) = {
-    val str = allAuthors.flatMap(_.name2String).distinct.sorted.mkString("\n")
+    val str = authors2Str(allAuthors) //allAuthors.flatMap(_.name2String).distinct.sorted.mkString("\n")
     val ofs = new FileOutputStream(outputFile)
     IOUtils.write(str, ofs, StandardCharsets.UTF_8)
   }
 
-  val allAuthors = TgzUtil.processGzFile("/home/dele/tmp/medline17n0885.xml.gz", readAllAuthors)
-  dumpAuthors("/home/dele/tmp/medline17n0885.authors.distinct.txt")
+  val fileIndex = 885
+  val allAuthors = TgzUtil.processGzFile(f"/home/dele/tmp/medline17n0$fileIndex%03d.xml.gz", readAllAuthors)
+  dumpAuthors(f"/home/dele/tmp/medline17n0$fileIndex%03d.authors.distinct.txt")
 }

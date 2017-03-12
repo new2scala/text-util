@@ -35,6 +35,7 @@ case class _Author(
 
   private def _s(x:Option[String]):String = x.getOrElse("")
   def name2String: Option[String] = if (isIndividual) Option(s"${_s(LastName)}\t\t${_s(ForeName)}\t\t${_s(Initials)}\t\t${_s(Suffix)}") else None
+  def foreName2String: Option[String] = if (isIndividual) Option(s"${_s(ForeName)}\t\t${_s(Initials)}\t\t${_s(Suffix)}") else None
 }
 
 case class _AuthorList(CompleteYN: Option[String], Authors: List[_Author])
